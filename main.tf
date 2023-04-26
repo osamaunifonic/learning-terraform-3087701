@@ -27,7 +27,7 @@ resource "aws_instance" "block" {
 resource "aws_security_group" "blog" {
 name           = "blog"
 description    = "testing "
-vpc_id         = "data.aws_vpc.default.id" 
+vpc_id         = "vpc-7d43cd04" 
 
 }
 
