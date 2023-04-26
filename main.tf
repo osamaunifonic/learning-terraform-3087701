@@ -1,62 +1,11 @@
-data "aws_ami" "app_ami" {
-  most_recent = true
+resource "aws_customer_gateway" "chinamoily" {
+  bgp_asn    = 65000
+  ip_address = "223.119.61.189"
+  device_name = "Fortigate"
+  type       = "ipsec.1"
 
-  filter {
-    name   = "name"
-    values = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["979382823631"] # Bitnami
-}
-
-resource "aws_instance" "block" {
-  ami           = data.aws_ami.app_ami.id
-  instance_type = var.instance_type
-   vpc_security_group_ids= [aws_security_group.blog.id]
   tags = {
-    Name = "HelloWorld"
+    Name = "chinamoily-customer-gateway"
   }
-}
-
-
-resource "aws_security_group" "blog" {
-name           = "blog"
-description    = "testing "
-vpc_id         = "vpc-7d43cd04" 
-
-}
-
-resource "aws_security_group_rule" "blog_http_in" {
- type              = "ingress"
- from_port         = 80
- to_port           = 80
- protocol          = "tcp"
- cidr_blocks       = ["0.0.0.0/0"]
- security_group_id = aws_security_group.blog.id
-}
-
-
-resource "aws_security_group_rule" "blog_https_in" {
- type              = "ingress"
- from_port         = 443
- to_port           = 443
- protocol          = "tcp"
- cidr_blocks       = ["0.0.0.0/0"]
- security_group_id = aws_security_group.blog.id
-}
-
-
-resource "aws_security_group_rule" "blog_all_out" {
- type              = "egress"
- from_port         = 0
- to_port           =  0
- protocol          = "-1"
- cidr_blocks       = ["0.0.0.0/0"]
- security_group_id = aws_security_group.blog.id
 }
 
