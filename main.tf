@@ -36,7 +36,7 @@ resource "aws_security_group_rule" "blog_http_in" {
  from_port         = 80
  to_prot           = 80
  protocal          = "tcp"
- cidr_blocks       = [0.0.0.0/0]
+ cidr_blocks       = ["0.0.0.0/0"]
  security_group_id = aws_security_group.blog.id
 }
 
@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "blog_https_in" {
  from_port         = 443
  to_prot           = 443
  protocal          = "tcp"
- cidr_blocks       = [0.0.0.0/0]
+ cidr_blocks       = ["0.0.0.0/0"]
  security_group_id = aws_security_group.blog.id
 }
 
@@ -56,7 +56,7 @@ resource "aws_security_group_rule" "blog_all_out" {
  from_port         = 0
  to_prot           =  0
  protocal          = "-1"
- cidr_blocks       = [0.0.0.0/0]
+ cidr_blocks       = ["0.0.0.0/0"]
  security_group_id = aws_security_group.blog.id
 }
 
