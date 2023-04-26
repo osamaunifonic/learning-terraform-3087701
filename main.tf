@@ -22,3 +22,11 @@ resource "aws_vpn_gateway_attachment" "vpn_attachment" {
   vpn_gateway_id = aws_vpn_gateway.chinamoily-vpn-gateway.id
 }
 
+
+
+resource "aws_vpn_connection" "chinamoily" {
+  vpn_gateway_id      = aws_vpn_gateway.chinamoily-vpn-gateway.id
+  customer_gateway_id = aws_customer_gateway.chinamoily.id
+  type                = "ipsec.1"
+  static_routes_only  = true
+}
