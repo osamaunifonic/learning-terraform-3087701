@@ -9,3 +9,16 @@ resource "aws_customer_gateway" "chinamoily" {
   }
 }
 
+
+
+resource "aws_vpn_gateway" "chinamoily-vpn-gateway" {
+  tags = {
+    Name = "chinamoily-vpn-gateway"
+  }
+}
+
+resource "aws_vpn_gateway_attachment" "vpn_attachment" {
+  vpc_id         = "vpc-7d43cd04"
+  vpn_gateway_id = aws_vpn_gateway.chinamoily-vpn-gateway.id
+}
+
