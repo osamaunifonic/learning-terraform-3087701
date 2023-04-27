@@ -29,4 +29,18 @@ resource "aws_vpn_connection" "chinamoily" {
   customer_gateway_id = aws_customer_gateway.chinamoily.id
   type                = "ipsec.1"
   static_routes_only  = true
+  local_ipv4_network_cidr= ["223.118.36.3/32"]
+  remote_ipv4_network_cidr = ["20.10.14.186/32","20.10.14.197/32"]
+  tunnel1_preshared_key = "EJy6SBMevT1Yz4G4"
+  tunnel1_ike_versions = "ikev1"
+  tunnel1_phase1_dh_group_numbers = 2
+  tunnel1_phase1_encryption_algorithms = "AES256"
+  tunnel1_phase1_integrity_algorithms = "SHA2-256"
+  tunnel1_phase1_lifetime_seconds = 28800
+
+  tunnel2_phase1_encryption_algorithms = "AES256"
+  tunnel2_phase1_integrity_algorithms = "SHA2-256"
+  tunnel2_phase1_lifetime_seconds = 28800
+  tunnel1_startup_action = "start"
+
 }
